@@ -17,6 +17,8 @@ const responseWithBaseRes = (
     return new Response(res, {
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'https://60s-view.netlify.app',
+            'Access-Control-Allow-Methods': 'GET'
         },
     })
 }
