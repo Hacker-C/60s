@@ -1,8 +1,19 @@
 import { serve } from "https://deno.land/std@0.155.0/http/server.ts";
 
+// 运行环境
+type Env = 'development' | 'production'
+
+/**
+ * @param obj 响应数据
+ * @param env CORS 的  Access-Control-Allow-Origin 字段，判断是本地开发还是远程部署，所允许的域名
+ * @param status 响应状态码
+ * @param message 响应说明
+ * @returns Response
+ */
 const responseWithBaseRes = (
-    obj: Record<number | string | symbol, any>
-        | string | number | boolean | null | undefined,
+    obj: Record<number | string | symbol, unknown>
+        | string | string[] | number | boolean | null | undefined,
+    env: Env,
     status = 200,
     message = 'OK'
 ) => {
@@ -14,15 +25,18 @@ const responseWithBaseRes = (
         res = JSON.stringify({ status: 500, message: 'Oops', data: {} })
     }
 
+    const ALLOW_ORIGIN = env === 'development' ? 'http://localhost:3333' : 'https://60s-view.netlify.app'
+
     return new Response(res, {
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'https://60s-view.netlify.app',
+            'Access-Control-Allow-Origin':  ALLOW_ORIGIN,
             'Access-Control-Allow-Methods': 'GET'
         },
     })
 }
 
+// deno-lint-ignore no-unused-vars
 function Utf82Ascii(str: string) {
     return str.split("").map(e => `#&${e.charCodeAt(0)};`).join("")
 }
@@ -51,7 +65,9 @@ async function handler(req: Request) {
     if (isText) {
         return new Response(cache[today].join("\n"))
     } else {
-        return responseWithBaseRes(cache[today])
+        // 本地开发用：development -> 允许 http://localhost:3333 请求
+        // 远程部署：production -> 允许 https://60s-view.netlify.app 请求
+        return responseWithBaseRes(cache[today], 'production')
     }
 }
 
