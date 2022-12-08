@@ -6,7 +6,7 @@
 
 - 下载 [deno](https://deno.land/manual@v1.28.3/getting_started/installation)，配置 `.vscode/settings.json` 中的 `'deno.path'` 为你的环境
 - 下载 VS Code 插件：[Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
-- 执行：`deno run main.ts`
+- 执行：`deno run --allow-net main.ts`
 - 使用示例：https://github.com/hacker-c/60s-view
 
 ## Deploy

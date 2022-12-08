@@ -67,7 +67,7 @@ async function handler(req: Request) {
     } else {
         // 本地开发用：development -> 允许 http://localhost:3333 请求
         // 远程部署：production -> 允许 https://60s-view.netlify.app 请求
-        return responseWithBaseRes(cache[today], 'production')
+        return responseWithBaseRes(cache[today], 'development')
     }
 }
 
