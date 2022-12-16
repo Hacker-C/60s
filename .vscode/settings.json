@@ -1,5 +1,5 @@
 {
-  "deno.path": "G:\\dev\\deno\\deno.exe",
-  "deno.enable": true,
-  "deno.lint": true,
+	"deno.path": "G:\\dev\\deno\\deno.exe",
+	"deno.enable": true,
+	"deno.lint": true
 }
