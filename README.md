@@ -16,3 +16,4 @@
 ## Deploy
 
 - [deno.dev](https://deno.dev)
+- 注：部署之后，访问出错，或者结果不对，请科学上网再试！
