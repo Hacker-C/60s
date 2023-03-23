@@ -31,7 +31,7 @@ const responseWithBaseRes = (
 		res = JSON.stringify({ status: 500, message: 'Oops', data: {} });
 	}
 
-	const ALLOW_ORIGIN = env === 'development' ? 'http://localhost:3333' : 'https://60s-view.netlify.app';
+	const ALLOW_ORIGIN = env === 'development' ? 'http://localhost:3333' : 'https://60s.mphy.me';
 
 	return new Response(res, {
 		headers: {
