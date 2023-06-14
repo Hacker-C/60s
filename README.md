@@ -28,6 +28,7 @@
 ## 部署
 
 - 推荐使用 [deno.dev](https://deno.dev)（免费）
+- 部署之前记得修改 `config.ts` 中的 `env` 为 `'production'`
 - 注意：部署之后，访问出错，或者结果不对，请科学上网再试！
 
 ## 致谢
