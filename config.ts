@@ -6,7 +6,7 @@ export const env: Env = 'production';
  远程部署：production -> 允许 https://60s.mphy.me 请求
  这取决于你的实际情况
 */
-export const ALLOW_ORIGIN = (env: Env) => env === 'development' ? 'http://localhost:3333' : 'https://60s.mphy.me';
+export const ALLOW_ORIGIN = (env: Env) => env === 'development' ? 'http://localhost:3333' : 'https://60s.mphy.top';
 
 export const headers = {
 	'Content-Type': 'application/json',

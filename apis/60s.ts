@@ -1,7 +1,7 @@
 import { theResponse } from "../main.ts";
 
 const api = (offset: number) =>
-	`https://www.zhihu.com/api/v4/columns/c_1261258401923026944/items?limit=1&offset=${offset}`;
+	`https://www.zhihu.com/api/v4/columns/c_1715391799055720448/items?limit=1&offset=${offset}`;
 const oneHourMs = 60 * 60 * 1000;
 const cache: Record<number, string[]> = {};
 
@@ -18,8 +18,14 @@ export async function handle60s(url: URL) {
 		let offset = 0;
 		let content = null;
 		for (;;) {
-			const { data } = await (await fetch(api(offset))).json();
+			const { data } = await (await fetch(api(offset), {
+        headers: {
+          "cookie": Deno.env.get("ZHIHU_COOKIE") ?? ''
+        }
+      })).json();
+      console.log(data)
 			const res = data?.[0]?.content;
+      console.log(res)
 			// BUGFIX: 若数据为空（专栏还未编写今日新闻），则往前一天请求，直到成功或尝试 10 次为止
 			if (res || offset > 10) {
 				content = res;
@@ -31,7 +37,6 @@ export async function handle60s(url: URL) {
 			/<p\s+data-pid=[^<>]+>([^<>]+)<\/p>/g,
 		);
 		cache[today] = contents.map((e: string) => Ascii2Utf8(e.replace(/<[^<>]+>/g, '')));
-		cache[today].splice(1, 1);
 	}
 
 	if (isText) {
